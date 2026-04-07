@@ -1,0 +1,137 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Social Network{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        {% csrf_token %}
+        <script>
+            const csrftoken = '{{ csrf_token }}';
+            const isAuthenticated = "{{ user.is_authenticated }}" === "True";
+            const username="{{user.username}}"
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white border-bottom">
+            <div class="container">
+                
+                <a class="navbar-brand fw-bold" href="#">Network</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a  id="my-profile-link" class="nav-link" href="#">{{ user.username }}</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a id="following-link" class="nav-link" href="#">Following</a>
+                    </li>
+                    
+                   
+                    <li class="nav-item">
+                        <a id="create-link" class="nav-link" href="#">Create</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    
+                {% else %}
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    
+                {%endif%}
+                
+                </ul>
+                </div>
+
+            </div>
+        </nav>
+
+    <br>
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+        
+    <template id="add-post-template">
+        
+         <div class="post-card post">
+            <div class="author-row">
+                <div class="avatar">{{user.username|slice:"0:2"}}</div>
+                <div>
+                <p class="author-name">{{user.username}}</p>
+                
+                </div>
+            </div>
+
+            <textarea class="content-area content" name="content" spellcheck="true"></textarea>
+
+            <div class="meta-row" style="margin-top: 14px;">
+                <span class="datetime timestamp" ></span>
+                <div class="actions">
+                    <div class="divider"></div>
+                    <button class="btn btn-save">
+                        Save
+                    </button>
+                </div>
+        </div>
+</div>
+    </template>
+    <template id="post-template">
+  
+        <div class="post-card post">
+            <div class="author-row">
+                <div class="avatar" ></div>
+                <div>
+                <p class="author-name username" ></p>
+                
+                </div>
+            </div>
+
+            <div class="content-area content" id="content" spellcheck="true"></div>
+
+            <div class="meta-row" style="margin-top: 14px;">
+                <span class="datetime timestamp" ></span>
+                <div class="actions">
+                <button class="btn btn-like" >
+                    <svg class="heart-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <span class="likes-count" ></span>
+                </button>
+                <div class="divider"></div>
+                <button class="btn btn-edit" style="display: none;">
+                    <svg class="edit-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    Edit
+                </button>
+            </div>
+        </div>
+</div>
+    </template>
+    <template id="navigation-template">
+        <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-outline-light prev-btn">Previous</button>
+            <button class="btn btn-outline-light next-btn">Next</button>
+        </div>
+    </template>
+
+    <script src="{% static 'network/script.js' %}"></script>
+    </body>
+</html>

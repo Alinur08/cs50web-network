@@ -1,0 +1,47 @@
+{% extends "network/layout.html" %}
+
+
+    
+    {%block body%}
+      <div class="body">
+            <div id="add-post-container" style="display:none;">
+                <svg class="spinner" fill="hsl(228, 97%, 42%)" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite"/></path></svg>
+            </div>
+            <div id="posts-container">
+                <svg class="spinner" fill="hsl(228, 97%, 42%)" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite"/></path></svg>
+                
+            </div>
+            
+            <div id="profile-container" class="container mt-4" style="display:none;">
+                <div class="card bg-secondary text-light p-3 mb-4">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <h3 id="username"></h3>
+                            <p class="mb-1">
+                                <strong>Followers:</strong> 
+                                <span id="followers-count"></span>
+                            </p>
+                            <p>
+                                <strong>Following:</strong> 
+                                <span id="following-count"></span>
+                            </p>
+                        </div>
+
+                        
+                        <button id="follow-btn" class="btn btn-light" style="display: none;"></button>
+                        
+
+                    </div>
+                </div>
+
+    
+            <div id="profile-posts-container"></div>
+
+            </div>
+            
+            
+       </div>
+       
+    {%endblock%}
+    
